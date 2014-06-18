@@ -109,17 +109,30 @@ module.exports = class MojioClient
     _apps: (callback) -> # Use if you want the raw result of the call.
         @request({ method: 'GET', resource: @apps_resource}, callback)
 
-    # Get App
+    # Get Apps
     apps: (callback) ->
         @_apps((error, result) => callback(error, result))
 
-    # Post App
-    # TODO::
+    # Get App By ID
+    getAppById: (id, callback) ->
+        @request({ method: 'GET', resource: @apps_resource, parameters: {id: id}}, callback)
+
+    # Get Default User App
+    getApp: (callback) -> 
+        @request({ method: 'GET', resource: @apps_resource, id: @options.application}, callback)
+
+    #Post App
+    #postApp: (callback) ->
+    #    @request({ method: 'POST', resource: @apps_resource, parameters: {} }, callback)
 
     # Put App
-    # TODO::
-
-    # Delete App
+    putApp: (app_model, callback) ->
+        @request({ method: 'PUT', resource: @apps_resource, parameters: app_model}, callback)
+	
+	#putApp: (app_model, callback) ->
+    #    @request({ method: 'PUT',  resource: 'Apps', body: JSON.stringify(app_model) }, callback)
+    
+	# Delete App
     # TODO::
 
     # Post App_observer
